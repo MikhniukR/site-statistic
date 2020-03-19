@@ -10,6 +10,9 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.Objects;
 
+/**
+ * The Visit info.
+ */
 @Entity
 
 public class VisitInfo {
@@ -24,9 +27,18 @@ public class VisitInfo {
     @CreationTimestamp
     private Date createdAt;
 
+    /**
+     * Instantiates a new Visit info.
+     */
     public VisitInfo() {
     }
 
+    /**
+     * Instantiates a new Visit info.
+     *
+     * @param userId  the user id
+     * @param siteUrl the site url
+     */
     public VisitInfo(String userId, String siteUrl) {
         this();
         this.userId = userId;
@@ -34,34 +46,74 @@ public class VisitInfo {
         this.createdAt = Calendar.getInstance().getTime();
     }
 
+    /**
+     * Gets id.
+     *
+     * @return the id
+     */
     public Long getId() {
         return id;
     }
 
+    /**
+     * Sets id.
+     *
+     * @param id the id
+     */
     public void setId(Long id) {
         this.id = id;
     }
 
+    /**
+     * Gets user id.
+     *
+     * @return the user id
+     */
     public String getUserId() {
         return userId;
     }
 
+    /**
+     * Sets user id.
+     *
+     * @param userId the user id
+     */
     public void setUserId(String userId) {
         this.userId = userId;
     }
 
+    /**
+     * Gets site url.
+     *
+     * @return the site url
+     */
     public String getSiteUrl() {
         return siteUrl;
     }
 
+    /**
+     * Sets site url.
+     *
+     * @param siteUrl the site url
+     */
     public void setSiteUrl(String siteUrl) {
         this.siteUrl = siteUrl;
     }
 
+    /**
+     * Gets created at.
+     *
+     * @return the created at
+     */
     public Date getCreatedAt() {
         return createdAt;
     }
 
+    /**
+     * Sets created at.
+     *
+     * @param createdAt the created at
+     */
     public void setCreatedAt(Date createdAt) {
         this.createdAt = createdAt;
     }
