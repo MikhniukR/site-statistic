@@ -14,14 +14,14 @@ public interface VisitRepository extends JpaRepository<VisitInfo, Long> {
 
     @Query(value = "SELECT COUNT(v) FROM VisitInfo v " +
             "WHERE v.createdAt  >= :start AND v.createdAt <= :end")
-    Integer getCount(@Param("start") Date start,
-                         @Param("end") Date end);
+    Integer getCountOfVisiting(@Param("start") Date start,
+                               @Param("end") Date end);
 
     @Query(value = "SELECT COUNT(DISTINCT v.userId) FROM VisitInfo v " +
             "WHERE v.createdAt  >= :start AND v.createdAt <= :end " +
             "GROUP BY v.userId " +
             "HAVING COUNT(distinct v.siteUrl) >= 10")
-    Integer getUniqSuperUsers(@Param("start") Date start,
-                         @Param("end") Date end);
+    Integer getCountOfUniqSuperUsers(@Param("start") Date start,
+                                     @Param("end") Date end);
 
 }
