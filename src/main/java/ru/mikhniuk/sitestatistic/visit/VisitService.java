@@ -25,16 +25,16 @@ public class VisitService {
         dayStart.setSeconds(0);
 
         return new DayStatistic(
-                visitRepository.getCount(dayStart, now),
+                visitRepository.getCountOfVisiting(dayStart, now),
                 visitRepository.getUniqUsers(dayStart, now)
         );
     }
 
     public PeriodStatistic getPeriodStatistic(Date start, Date end) {
         return new PeriodStatistic(
-                visitRepository.getCount(start, end),
+                visitRepository.getCountOfVisiting(start, end),
                 visitRepository.getUniqUsers(start, end),
-                visitRepository.getUniqSuperUsers(start, end)
+                visitRepository.getCountOfUniqSuperUsers(start, end)
         );
     }
 }
