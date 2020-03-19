@@ -2,10 +2,7 @@ package ru.mikhniuk.sitestatistic.visit;
 
 import org.springframework.stereotype.Service;
 
-import java.util.Calendar;
 import java.util.Date;
-import java.util.List;
-import java.util.stream.Collectors;
 
 @Service
 
@@ -20,9 +17,24 @@ public class VisitService {
         return visitRepository.save(visitInfo);
     }
 
-    public List<VisitInfo> findByTime(Date start, Date end) {
-        return visitRepository.findAll().stream().filter(
-                v -> v.getCreatedAt().after(start) && v.getCreatedAt().before(end)
-                ).collect(Collectors.toList());
+    public DayStatistic getDayStatistic() {
+        Date now = new Date();
+        Date dayStart = new Date();
+        dayStart.setHours(0);
+        dayStart.setMinutes(0);
+        dayStart.setSeconds(0);
+
+        return new DayStatistic(
+                visitRepository.getCount(dayStart, now),
+                visitRepository.getUniqUsers(dayStart, now)
+        );
+    }
+
+    public PeriodStatistic getPeriodStatistic(Date start, Date end) {
+        return new PeriodStatistic(
+                visitRepository.getCount(start, end),
+                visitRepository.getUniqUsers(start, end),
+                visitRepository.getUniqSuperUsers(start, end)
+        );
     }
 }

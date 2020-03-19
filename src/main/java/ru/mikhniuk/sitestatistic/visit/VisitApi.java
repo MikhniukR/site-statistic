@@ -9,7 +9,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.util.Calendar;
 import java.util.Date;
 
 @RestController
@@ -28,20 +27,13 @@ public class VisitApi {
         VisitInfo visitInfo = new VisitInfo(userId, siteUrl);
         visitService.save(visitInfo);
 
-        Date now = new Date();
-        Date dayStart = new Date();
-        dayStart.setHours(0);
-        dayStart.setMinutes(0);
-        dayStart.setSeconds(0);
-        return ResponseEntity.ok(
-                new DayStatistic(visitService.findByTime(dayStart, now)));
+        return ResponseEntity.ok(visitService.getDayStatistic());
     }
 
     @GetMapping
     public ResponseEntity<?> getPeriodStatistic(
             @RequestParam("start") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) Date start,
             @RequestParam("end")   @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) Date end) {
-        return ResponseEntity.ok
-                (new PeriodStatistic(visitService.findByTime(start, end)));
+        return ResponseEntity.ok(visitService.getPeriodStatistic(start, end));
     }
 }

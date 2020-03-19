@@ -1,23 +1,14 @@
 package ru.mikhniuk.sitestatistic.visit;
 
-import java.util.HashSet;
-import java.util.List;
 import java.util.Objects;
-import java.util.Set;
 
 public class DayStatistic {
     public Integer countOfVisiting;
     public Integer countUniqUsers;
 
     public DayStatistic(Integer countOfVisiting, Integer countUniqUsers) {
-
-    }
-
-    public DayStatistic(List<VisitInfo> statistic) {
-        this.countOfVisiting = statistic.size();
-        Set<String> users = new HashSet<>();
-        statistic.stream().forEach(v -> users.add(v.getUserId()));
-        this.countUniqUsers = users.size();
+        this.countOfVisiting = countOfVisiting;
+        this.countUniqUsers = countUniqUsers;
     }
 
     public Integer getCountOfVisiting() {
