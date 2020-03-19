@@ -11,16 +11,31 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.util.Date;
 
+/**
+ * The Visit api.
+ */
 @RestController
 @RequestMapping("/api/visit")
 public class VisitApi {
     private final VisitService visitService;
 
+    /**
+     * Instantiates a new Visit api.
+     *
+     * @param visitService the visit service
+     */
     @Autowired
     public VisitApi(VisitService visitService) {
         this.visitService = visitService;
     }
 
+    /**
+     * Create response entity. And return day statistic
+     * countOfVisiting countUniqUsers
+     * @param userId  the user id
+     * @param siteUrl the site url
+     * @return the response entity
+     */
     @PostMapping
     public ResponseEntity<?> create(@RequestParam("userId") String userId,
                                     @RequestParam("siteUrl") String siteUrl) {
@@ -30,6 +45,14 @@ public class VisitApi {
         return ResponseEntity.ok(visitService.getDayStatistic());
     }
 
+    /**
+     * Gets period statistic.
+     * countOfVisiting countUniqUsers countOfRegularUsers
+     *
+     * @param start the start
+     * @param end   the end
+     * @return the period statistic
+     */
     @GetMapping
     public ResponseEntity<?> getPeriodStatistic(
             @RequestParam("start") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) Date start,

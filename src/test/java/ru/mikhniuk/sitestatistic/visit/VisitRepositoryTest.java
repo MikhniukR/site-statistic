@@ -29,7 +29,7 @@ class VisitRepositoryTest {
         visitRepository.save(user1);
         visitRepository.save(user2);
 
-        assertEquals(2, visitRepository.getUniqUsers(user1.getCreatedAt(), user2.getCreatedAt()));
+        assertEquals(2, visitRepository.getCountUniqUsers(user1.getCreatedAt(), user2.getCreatedAt()));
     }
 
     @Test
@@ -60,6 +60,6 @@ class VisitRepositoryTest {
         }
         Date end = user2.getCreatedAt();
 
-        assertEquals(1, visitRepository.getCountOfUniqSuperUsers(start, end));
+        assertEquals(1, visitRepository.getCountOfUniqRegularUsers(start, end));
     }
 }
